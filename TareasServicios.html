@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Ejemplo Codigos de Profe</title>
+    <link rel="stylesheet" href="CodigosJava.css">
+   
+</head>
+
+<body>
+<div class="code-container">
+
+<pre>
+<code>
+<h1>Ejercicio 1</h1>  <!-- EJERCICIO 1 -->
+<h2> Servidor.java</h2>
+package Ejemplos;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class HoraClient {
+    public static void main(String[] args) {
+        try {
+            // 1. Crear el socket datagrama para el cliente
+            System.out.println("Creando socket datagrama");
+
+            DatagramSocket datagramSocket = new DatagramSocket();
+            // El cliente crea un socket UDP que se utilizará para enviar y recibir paquetes.
+            // No se especifica un puerto aquí, por lo que el sistema operativo asignará uno automáticamente.
+
+            // 2. Preparar el mensaje para enviar al servidor
+            System.out.println("Enviando petición al servidor");
+
+            String mensaje = new String("hora"); // El mensaje que se enviará es "hora".
+            InetAddress serverAddr = InetAddress.getByName("localhost");
+            // Se obtiene la dirección IP del servidor (en este caso, "localhost" para la máquina local).
+
+            DatagramPacket datagrama1 = new DatagramPacket(
+                mensaje.getBytes(),        // Convierte el mensaje en un array de bytes.
+                mensaje.getBytes().length, // Especifica la longitud del mensaje en bytes.
+                serverAddr,                // Dirección IP del servidor.
+                5555                       // Puerto donde el servidor está escuchando.
+            );
+            // Se crea un objeto `DatagramPacket` que encapsula el mensaje, la dirección del servidor y el puerto.
+
+            datagramSocket.send(datagrama1);
+            // Se envía el paquete al servidor a través del socket datagrama.
+
+            System.out.println("Mensaje enviado");
+
+            // 3. Preparar para recibir la respuesta del servidor
+            System.out.println("Recibiendo respuesta");
+
+            byte[] respuesta = new byte[100];
+            // Buffer para almacenar los datos de la respuesta (máximo 100 bytes).
+            
+            DatagramPacket datagrama2 = new DatagramPacket(respuesta, respuesta.length);
+            // Se crea un paquete para recibir los datos enviados por el servidor.
+            // El buffer `respuesta` se utilizará para almacenar el contenido del mensaje recibido.
+
+            datagramSocket.receive(datagrama2);
+            // El método `receive` bloquea la ejecución hasta que se recibe un paquete.
+            // La respuesta del servidor se almacena en el paquete `datagrama2` y su contenido en el buffer `respuesta`.
+
+            System.out.println("Mensaje recibido: " + new String(respuesta));
+            // Convierte el contenido del buffer (bytes) a un String y lo muestra por pantalla.
+            // Este mensaje será la hora enviada por el servidor.
+
+            // 4. Cerrar el socket
+            System.out.println("Cerrando el socket datagrama");
+            datagramSocket.close();
+            // Se cierra el socket para liberar los recursos del sistema.
+
+            System.out.println("Terminado");
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Muestra el error si ocurre un problema de entrada/salida.
+        }
+    }
+}
+</code>
+</pre>
+
+<pre>
+<code>
+  
+<h2>Cliente.java</h2>
+package Ejemplos;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
+import java.util.Date;
+
+public class HoraServer {
+    public static void main(String[] args) {
+        System.out.println("Arrancando servidor de hora.");
+        DatagramSocket datagramSocket = null; // Declaración del socket UDP que usará el servidor.
+
+        try {
+            // Configuración de la dirección y puerto del servidor.
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            datagramSocket = new DatagramSocket(addr); // Creación del socket UDP en la dirección y puerto especificados.
+        } catch (SocketException e) {
+            e.printStackTrace(); // Manejo de posibles errores al crear el socket.
+        }
+
+        // Bucle principal del servidor. Permite recibir mensajes de clientes de forma continua.
+        while (datagramSocket != null) {
+            try {
+                System.out.println("Esperando mensaje");
+
+                // Buffer para almacenar el mensaje recibido del cliente.
+                byte[] buffer = new byte[4]; // Se espera un mensaje de 4 bytes ("hora").
+                DatagramPacket datagrama1 = new DatagramPacket(buffer, 4); // Paquete para recibir datos.
+                
+                // Espera bloqueante hasta que se recibe un paquete en el socket.
+                datagramSocket.receive(datagrama1);
+
+                // Convertir los datos recibidos del buffer en un String para su interpretación.
+                String mensaje = new String(datagrama1.getData()).trim(); // El método `trim()` elimina espacios en blanco adicionales.
+
+                // Obtener la dirección IP y puerto del cliente que envió el mensaje.
+                InetAddress clientAddr = datagrama1.getAddress(); // Dirección IP del cliente.
+                int clientPort = datagrama1.getPort(); // Puerto desde el que se envió el mensaje.
+
+                // Información sobre el cliente y el mensaje recibido.
+                System.out.println("Mensaje recibido: desde " + clientAddr + ", puerto " + clientPort);
+                System.out.println("Contenido del mensaje: " + mensaje);
+
+                // Validación del mensaje recibido. Si el mensaje es "hora", se responde con la hora actual.
+                if (mensaje.equals("hora")) {
+                    System.out.println("Enviando respuesta");
+
+                    // Obtener la hora actual como cadena de texto.
+                    Date d = new Date(System.currentTimeMillis());
+                    byte[] respuesta = d.toString().getBytes(); // Convertir la hora en un array de bytes.
+
+                    // Crear un paquete para enviar la respuesta al cliente.
+                    DatagramPacket datagrama2 = new DatagramPacket(respuesta, respuesta.length, clientAddr, clientPort);
+
+                    // Enviar el paquete al cliente.
+                    datagramSocket.send(datagrama2);
+
+                    System.out.println("Mensaje enviado");
+                } else {
+                    // Si el mensaje no es "hora", se notifica que no es reconocido.
+                    System.out.println("Mensaje recibido no reconocido");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejo de posibles errores de entrada/salida.
+            }
+        }
+        System.out.println("Terminado"); // Mensaje que indica que el servidor ha terminado su ejecución.
+    }
+}
+</code>
+</pre>
+
+<hr style="border: 3px solid whitesmoke;"> <!-- ESPACIO -->
+
+<pre>
+<code>
+<h1>Ejercicio 2</h1> <!-- EJERCICIO 2 -->
+<h2>Servidor.java</h2>
+
+package Ejemplos;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+public class CalcClient {
+    public static void main(String[] args) {
+        try {
+            // 1. Crear el socket del cliente
+            System.out.println("Creando socket cliente");
+
+            Socket clientSocket = new Socket();
+            // El socket `clientSocket` se utilizará para conectarse al servidor y realizar la comunicación.
+            // Aquí no se especifica un puerto local, por lo que el sistema operativo asigna uno automáticamente.
+
+            // 2. Establecer la conexión con el servidor
+            System.out.println("Estableciendo la conexión");
+
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            // Se define la dirección y el puerto del servidor. En este caso:
+            // - Dirección: "localhost" (la misma máquina donde se ejecuta el servidor).
+            // - Puerto: 5555 (el puerto donde el servidor escucha).
+            
+            clientSocket.connect(addr);
+            // Conecta el socket del cliente al servidor especificado por la dirección y el puerto.
+
+            // Obtener los flujos de entrada y salida para la comunicación con el servidor.
+            InputStream is = clientSocket.getInputStream(); // Para leer la respuesta del servidor.
+            OutputStream os = clientSocket.getOutputStream(); // Para enviar datos al servidor.
+
+            // 3. Enviar la operación al servidor
+            System.out.println("Enviando petición de suma");
+
+            os.write("+".getBytes());
+            // Se envía el operador "+" como una cadena convertida en bytes.
+            // Este operador indica que el cliente solicita una suma.
+
+            // 4. Enviar los operandos al servidor
+            System.out.println("Enviando primer operando");
+
+            os.write(59);
+            // El primer operando (59) se envía como un entero al servidor.
+
+            System.out.println("Enviando segundo operando");
+
+            os.write(130);
+            // El segundo operando (130) también se envía como un entero.
+
+            // 5. Recibir el resultado del servidor
+            System.out.println("Recibiendo resultado");
+
+            int result = is.read();
+            // El cliente lee la respuesta del servidor, que es el resultado de la operación.
+            // La respuesta se lee como un entero único del flujo de entrada.
+
+            System.out.println("Resultado de la suma: " + result);
+            // Se imprime el resultado recibido.
+
+            // 6. Cerrar el socket del cliente
+            System.out.println("Cerrando el socket cliente");
+
+            clientSocket.close();
+            // Se cierra el socket para liberar los recursos asociados.
+
+            System.out.println("Terminado");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Captura y muestra cualquier error de entrada/salida que ocurra durante la ejecución.
+        }
+    }
+}
+</code>
+</pre>
+
+<pre>
+<code>
+<h2>Cliente.java</h2>
+package Ejemplos;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class CalcServer extends Thread { // La clase extiende Thread para manejar conexiones de clientes en hilos separados.
+    private Socket clientSocket; // Este socket representa la conexión con un cliente.
+
+    // Constructor que asocia el socket del cliente al hilo.
+    public CalcServer(Socket socket) {
+        clientSocket = socket; // Se guarda el socket del cliente para que el hilo pueda procesarlo.
+    }
+
+    // Método que ejecutará el hilo cuando se inicie.
+    public void run() {
+        try {
+            System.out.println("Arrancando hilo");
+
+            // Obtener los flujos de entrada y salida del socket.
+            InputStream is = clientSocket.getInputStream(); // Flujo para leer datos enviados por el cliente.
+            OutputStream os = clientSocket.getOutputStream(); // Flujo para enviar datos al cliente.
+
+            System.out.println("Esperando mensaje de operación");
+
+            // Leer la operación enviada por el cliente.
+            byte[] buffer = new byte[1]; // Buffer para recibir la operación (un solo carácter: +, -, *, /).
+            is.read(buffer); // Leer la operación desde el flujo de entrada.
+            String operacion = new String(buffer); // Convertir el byte leído en un String.
+
+            System.out.println("Operación recibida: " + operacion);
+
+            // Validar si la operación recibida es válida.
+            if (operacion.equals("+") || operacion.equals("-") || operacion.equals("*") || operacion.equals("/")) {
+                System.out.println("Esperando primer operador");
+
+                int op1 = is.read(); // Leer el primer operando como un entero.
+                System.out.println("Primer operador: " + op1);
+
+                System.out.println("Esperando segundo operador");
+
+                int op2 = is.read(); // Leer el segundo operando como un entero.
+                System.out.println("Segundo operador: " + op2);
+
+                System.out.println("Calculando resultado");
+
+                // Inicializar el resultado con un valor predeterminado.
+                int result = Integer.MIN_VALUE;
+
+                // Realizar la operación solicitada.
+                if (operacion.equals("+")) {
+                    result = op1 + op2; // Suma.
+                } else if (operacion.equals("-")) {
+                    result = op1 - op2; // Resta.
+                } else if (operacion.equals("*")) {
+                    result = op1 * op2; // Multiplicación.
+                } else if (operacion.equals("/")) {
+                    result = op1 / op2; // División (asumiendo que no hay división por cero).
+                }
+
+                System.out.println("Enviando resultado");
+
+                os.write(result); // Enviar el resultado al cliente.
+            } else {
+                System.out.println("Operación no reconocida"); // Mensaje si la operación es inválida.
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Manejar cualquier excepción durante la ejecución del hilo.
+        }
+
+        System.out.println("Hilo terminado"); // Mensaje cuando el hilo termina su ejecución.
+    }
+
+    // Método principal del servidor.
+    public static void main(String[] args) {
+        System.out.println("Creando socket servidor");
+
+        ServerSocket serverSocket = null; // Socket del servidor para aceptar conexiones entrantes.
+
+        try {
+            serverSocket = new ServerSocket(); // Crear el socket del servidor.
+
+            System.out.println("Realizando el bind");
+
+            // Asociar el socket del servidor a la dirección y puerto especificados.
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            serverSocket.bind(addr); // Vincular el socket del servidor a "localhost" y puerto 5555.
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejar errores al crear o vincular el socket.
+        }
+
+        System.out.println("Aceptando conexiones");
+
+        // Bucle principal del servidor para aceptar conexiones continuamente.
+        while (serverSocket != null) {
+            try {
+                // Esperar una conexión de un cliente.
+                Socket newSocket = serverSocket.accept(); // Bloquea la ejecución hasta que un cliente se conecta.
+
+                System.out.println("Conexión recibida");
+
+                // Crear un nuevo hilo para manejar la conexión del cliente.
+                CalcServer hilo = new CalcServer(newSocket);
+                hilo.start(); // Iniciar el hilo para procesar la solicitud del cliente.
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejar errores durante la aceptación de conexiones.
+            }
+        }
+
+        System.out.println("Terminado"); // Mensaje cuando el servidor finaliza.
+    }
+}
+
+</code>
+</pre>
+
+<hr style="border: 3px solid whitesmoke;"> <!-- ESPACIO -->
+
+<pre>
+<code>
+<h1>Ejercicio 3</h1> <!-- Ejercicio 3 -->
+<h2>Servidor.java</h2>
+package Ejemplos;
+
+import java.rmi.RemoteException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/**
+ * Cliente RMI para la calculadora remota.
+ * Se conecta al servidor RMI, obtiene la referencia del objeto remoto registrado y ejecuta operaciones matemáticas.
+ */
+public class RMICalcClient {
+    public static void main(String[] args) {
+
+        RMICalcInterface calc = null; // Declaración de la variable que almacenará la referencia al objeto remoto
+
+        try {
+            // Paso 1: Localizar el registro RMI en la máquina servidor
+            System.out.println("Localizando registro de objetos remotos...");
+            Registry registry = LocateRegistry.getRegistry("localhost", 5555);
+
+            // Paso 2: Obtener el stub del objeto remoto registrado con el nombre "Calculadora"
+            System.out.println("Obteniendo el stub del objeto remoto...");
+            calc = (RMICalcInterface) registry.lookup("Calculadora");
+
+        } catch (Exception e) {
+            System.out.println("ERROR: No se pudo conectar con el servidor RMI.");
+            e.printStackTrace();
+        }
+
+        // Verifica si se obtuvo correctamente la referencia al objeto remoto antes de proceder
+        if (calc != null) {
+            System.out.println("Realizando operaciones con el objeto remoto...");
+
+            try {
+                // Realiza operaciones matemáticas a través del objeto remoto
+                System.out.println("2 + 2 = " + calc.suma(2, 2));
+                System.out.println("99 - 45 = " + calc.resta(99, 45));
+                System.out.println("125 * 3 = " + calc.multip(125, 3));
+                System.out.println("1250 / 5 = " + calc.div(1250, 5));
+
+            } catch (RemoteException e) {
+                System.out.println("ERROR: Fallo en la ejecución de la operación remota.");
+                e.printStackTrace();
+            }
+
+            System.out.println("Terminado"); // Indica que el cliente ha finalizado la ejecución
+        } else {
+            System.out.println("ERROR: No se pudo obtener la referencia del objeto remoto.");
+        }
+    }
+}
+
+</code>
+</pre>
+
+<pre>
+<code>
+<h2>Interfaz.java</h2>
+package Ejemplos;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+    /**
+    * Interfaz remota para una calculadora RMI (Remote Method Invocation).
+    * Define los métodos que podrán ser invocados de forma remota desde un cliente.
+    * 
+    * Esta interfaz extiende Remote, lo que indica que los métodos declarados pueden
+    * ser llamados desde otra máquina a través de una red utilizando Java RMI.
+    */
+
+public interface RMICalcInterface extends Remote {
+    
+    /**
+     * Método para sumar dos números enteros.
+     * 
+     * @param a Primer operando.
+     * @param b Segundo operando.
+     * @return La suma de ambos operandos.
+     * @throws RemoteException Si ocurre un error en la comunicación remota.
+     */
+    public int suma(int a, int b) throws RemoteException;
+
+    /**
+     * Método para restar dos números enteros.
+     * 
+     * @param a Primer operando.
+     * @param b Segundo operando.
+     * @return La resta del primer operando menos el segundo.
+     * @throws RemoteException Si ocurre un error en la comunicación remota.
+     */
+    public int resta(int a, int b) throws RemoteException;
+
+    /**
+     * Método para multiplicar dos números enteros.
+     * 
+     * @param a Primer operando.
+     * @param b Segundo operando.
+     * @return El resultado de la multiplicación de ambos operandos.
+     * @throws RemoteException Si ocurre un error en la comunicación remota.
+     */
+    public int multip(int a, int b) throws RemoteException;
+
+    /**
+     * Método para dividir dos números enteros.
+     * 
+     * @param a Numerador (dividendo).
+     * @param b Denominador (divisor). No debe ser cero.
+     * @return El resultado de la división entera de 'a' entre 'b'.
+     * @throws RemoteException Si ocurre un error en la comunicación remota.
+     * @throws ArithmeticException Si 'b' es cero, para evitar una división por cero.
+     */
+    public int div(int a, int b) throws RemoteException;
+}
+</code>
+</pre>
+
+
+<pre>
+<code>
+<h2>Servidor.java</h2>
+    package Ejemplos;
+
+    import java.rmi.RemoteException;
+    import java.rmi.registry.LocateRegistry;
+    import java.rmi.registry.Registry;
+    import java.rmi.server.UnicastRemoteObject;
+    
+    /**
+     * Clase que implementa un servidor RMI (Remote Method Invocation).
+     * Este servidor ofrece una serie de operaciones matemáticas básicas a través de métodos remotos.
+     * Se basa en la interfaz RMICalcInterface, permitiendo que los clientes accedan a estos métodos de forma remota.
+     */
+    public class RMICalcServer implements RMICalcInterface {
+    
+        /**
+         * Implementación del método remoto para sumar dos números enteros.
+         * @param a Primer operando.
+         * @param b Segundo operando.
+         * @return La suma de ambos operandos.
+         * @throws RemoteException Si ocurre un error en la comunicación remota.
+         */
+        public int suma(int a, int b) throws RemoteException {
+            System.out.println("Objeto remoto: Sumando " + a + " y " + b + "...");
+            return (a + b);
+        }
+    
+        /**
+         * Implementación del método remoto para restar dos números enteros.
+         * @param a Primer operando.
+         * @param b Segundo operando.
+         * @return La resta del primer operando menos el segundo.
+         * @throws RemoteException Si ocurre un error en la comunicación remota.
+         */
+        public int resta(int a, int b) throws RemoteException {
+            System.out.println("Objeto remoto: Restando " + a + " y " + b + "...");
+            return (a - b);
+        }
+    
+        /**
+         * Implementación del método remoto para multiplicar dos números enteros.
+         * @param a Primer operando.
+         * @param b Segundo operando.
+         * @return El resultado de la multiplicación de ambos operandos.
+         * @throws RemoteException Si ocurre un error en la comunicación remota.
+         */
+        public int multip(int a, int b) throws RemoteException {
+            System.out.println("Objeto remoto: Multiplicando " + a + " por " + b + "...");
+            return (a * b);
+        }
+    
+        /**
+         * Implementación del método remoto para dividir dos números enteros.
+         * @param a Numerador (dividendo).
+         * @param b Denominador (divisor). No debe ser cero.
+         * @return El resultado de la división entera de 'a' entre 'b'.
+         * @throws RemoteException Si ocurre un error en la comunicación remota.
+         * @throws ArithmeticException Si 'b' es cero, para evitar una división por cero.
+         */
+        public int div(int a, int b) throws RemoteException {
+            System.out.println("Objeto remoto: Dividiendo " + a + " entre " + b + "...");
+            if (b == 0) {
+                throw new ArithmeticException("ERROR: No se puede dividir por cero.");
+            }
+            return (a / b);
+        }
+    
+        /**
+         * Método principal que inicializa el servidor RMI, crea el registro y registra el objeto remoto.
+         * @param args Argumentos de línea de comandos (no utilizados).
+         */
+        public static void main(String[] args) {
+            System.out.println("Creando el registro de objetos remotos...");
+    
+            Registry reg = null;
+            try {
+                // Se crea un registro RMI en el puerto 5555 para registrar los objetos remotos
+                reg = LocateRegistry.createRegistry(5555);
+                System.out.println("Registro de objetos remotos creado en el puerto 5555.");
+            } catch (Exception e) {
+                System.out.println("ERROR: No se ha podido crear el registro.");
+                e.printStackTrace();
+                return; // Si el registro falla, se detiene la ejecución del servidor
+            }
+    
+            System.out.println("Creando el objeto servidor e inscribiéndolo en el registro...");
+    
+            // Se crea una instancia del objeto servidor que implementa la interfaz remota RMICalcInterface
+            RMICalcServer serverObject = new RMICalcServer();
+    
+            try {
+                // Exporta el objeto remoto para que pueda ser accedido por clientes a través de RMI
+                // UnicastRemoteObject.exportObject(serverObject, 0) asigna automáticamente un puerto disponible
+                RMICalcInterface stub = (RMICalcInterface) UnicastRemoteObject.exportObject(serverObject, 0);
+    
+                // Registra el stub en el registro RMI con el nombre "Calculadora"
+                // Esto permite a los clientes buscar este nombre y obtener la referencia al objeto remoto
+                reg.rebind("Calculadora", stub);
+    
+                System.out.println("Servidor RMI listo y registrado con el nombre 'Calculadora'.");
+    
+            } catch (Exception e) {
+                System.out.println("ERROR: No se ha podido inscribir el objeto servidor.");
+                e.printStackTrace();
+            }
+        }
+    }
+</code>
+</pre>
+</div>
+
+</body>
+
+</html>
