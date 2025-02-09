@@ -1,77 +1,1047 @@
-<!DOCTYPE html>
-<html lang="es">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tareas Servicios (1. Ficheros, 2.Identificación IP, 3. Publicación de Mensajes)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Ejemplo Codigos de Profe</title>
-    <link rel="stylesheet" href="CodigosJava.css">
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
 
-</head>
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
 
-<body>
-    <div class="code-container">
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
 
-        <pre>
-<code>
-<h1>Ejercicio 1</h1>  <!-- EJERCICIO 1 -->
-<h2> Servidor.java</h2>
-<!--  -->
-</code>
-</pre>
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
 
-        <pre>
-<code>
-  
-<h2>Cliente.java</h2>
-<!--  -->
-</code>
-</pre>
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
 
-        <hr style="border: 3px solid whitesmoke;"> <!-- ESPACIO -->
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
 
-        <pre>
-<code>
-<h1>Ejercicio 2</h1> <!-- EJERCICIO 2 -->
-<h2>Servidor.java</h2>
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="18ac1017-243e-8089-b675-e29ca7215d5d" class="page serif"><header><h1 class="page-title">Tareas Servicios (1. Ficheros, 2.Identificación IP, 3. Publicación de Mensajes)</h1><p class="page-description"></p></header><div class="page-body"><p id="195c1017-243e-809d-8c30-fd1d3dbc9800" class="">1. Implementa una aplicación cliente/servidor que sirva documentos de texto. El servidor deberá almacenar documentos de texto, en ficheros txt. Cuando un cliente se conecte al servidor, especificará el número de fichero que desea obtener y el servidor le enviará su contenido, carácter a carácter. Usa para ello sockets stream.</p><ul id="195c1017-243e-806c-9ce0-efd858c934cb" class="toggle"><li><details open=""><summary>ClienteFichero.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-8017-bc6e-ecee4b595fd0" class="code"><code class="language-Java">package Ficheros;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+
+public class ClienteFichero {
+    
+    /**
+     * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+     */
+    
+    public static void main(String[] args) {
+    	
+        // Conectarse al servidor en localhost en el puerto 8888.
+        try (Socket s = new Socket(&quot;localhost&quot;, 8888)) {
+        	System.out.println(&quot;Cliente conectando en el puerto 8888.&quot;);
+        	
+        	// Lee y y envia datos al servidor.
+            BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));  
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));  
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));  
+            
+            // Solicita al usuario el número del archivo y muestra el contenido.
+            System.out.print(&quot;Introduzca el número del archivo para ver su contenido: &quot;);
+            String NumeroFichero = br2.readLine(); // solo introducir el número de fichero.
+
+            // Envía el número de fichero al servidor.
+            bw.write(NumeroFichero);
+            bw.newLine();
+            bw.flush();
+
+            // Recibe y muestra el contenido del fichero o el mensaje de error.
+            String caracter;
+            while ((caracter = br.readLine()) != null) {
+                System.out.println(caracter);  // Muestra línea por línea.
+            }
+
+        } catch (IOException e) {
+            // Si ocurre un error en la conexión o lectura/escritura, se muestra este mensaje.
+            System.out.println(&quot;Error en el cliente: &quot; + e.getMessage());
+        }
+    }
+}
+</code></pre></details></li></ul><ul id="195c1017-243e-8058-9fd3-c568381ea4dd" class="toggle"><li><details open=""><summary>ServidorFichero.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-809b-b7df-ffa557273b43" class="code"><code class="language-Java">package Ficheros;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class ServidorFichero {
+    
+    /**
+     * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+     */
+    
+    public static void main(String[] args) {
+    	
+        // Se inicializa el servidor en el puerto 8888.
+        try (ServerSocket ss = new ServerSocket(8888)) {
+        	
+        	// Mesnaje de que se conecta.
+            System.out.println(&quot;Servidor conectando en el puerto 8888.&quot;);
+            
+            while (true) {
+                try (Socket s = ss.accept()) {  // Espera una conexión de cliente.
+                   
+                    // Buffers para leer y escribir desde el socket.
+                    BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                    
+                    // Recibe el número de fichero desde el cliente.
+                    String NumeroFichero = br.readLine();
+                    String NombreFichero = &quot;C:\\Users\\anach\\DAM2\\EjerciciosServicios\\DesarrolloDeServiciosDeRed\\Fichero&quot; + NumeroFichero + &quot;.txt&quot;; 
+                    // Ruta de donde se encuentra. 
+
+                    try (BufferedReader br2 = new BufferedReader(new FileReader(NombreFichero))) {
+                       
+                    	// Lee el archivo y lo envía al cliente.
+                        int character;
+                        while ((character = br2.read()) != -1) {
+                            bw.write((char) character); 
+                        }
+                        bw.flush();  // Se asegura de que todo el contenido se envíe de una vez.
+
+                    } catch (FileNotFoundException e) {
+                        // Si introduces el número del fichero que no existe, se envía este mensaje.
+                        bw.write(&quot;Archivo no encontrado: &quot; + NombreFichero);
+                        bw.newLine();
+                        bw.flush();
+
+                    } catch (IOException e) {
+                        // Si ocurre otro error al leer el archivo.
+                        bw.write(&quot;Error al leer el archivo: &quot; + e.getMessage());
+                        bw.newLine();
+                        bw.flush();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // Captura cualquier excepción en el servidor.
+            System.out.println(&quot;Error en el servidor: &quot; + e.getMessage());
+        }
+    }
+}
+</code></pre></details></li></ul><p id="195c1017-243e-80cf-9114-e668b6c9405b" class="">
+</p><p id="195c1017-243e-8040-9354-cc64b424ca02" class="">
+</p><p id="195c1017-243e-808c-ba5a-daf3ddc0343e" class="">2. Implementa un servicio de identificación de direcciones IP usando sockets datagram. Los clientes enviarán peticiones de identificación al servidor, que contestará con un mensaje que contenga la dirección IP del cliente como una cadena de texto.</p><ul id="195c1017-243e-802a-99d9-cb3c1efa2f47" class="toggle"><li><details open=""><summary>ClienteIP.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-808f-8beb-f5ef6bfed0d2" class="code"><code class="language-Java">package IdentificaciónIP;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class ClienteIP {
+	
+	/**
+	 * 
+	 * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+	 */
+	
+	public static void main(String[] args) {
+		System.out.println(&quot;Creando cliente de identificación de IP.&quot;);
+		DatagramSocket ds = null;
+
+		try {
+			// Se crea un DatagramSocket para enviar y recibir mensajes.
+			ds = new DatagramSocket();
+			
+			String mensaje = &quot;Mensaje de identificación IP&quot;; // Mensaje a enviar.
+			
+			InetAddress ia = InetAddress.getByName(&quot;localhost&quot;); // Dirección del servidor.
+			
+			DatagramPacket d1 = new DatagramPacket(
+					mensaje.getBytes(), 
+					mensaje.length(), 
+					ia, 
+					8888
+			);
+			
+			
+			ds.send(d1); // Envía el mensaje al servidor.
+			
+			System.out.println(&quot;Mensaje enviado al servidor.&quot;);
+
+			byte[] respuesta = new byte[1024]; // Buffer para la respuesta del servidor.
+			DatagramPacket dp2 = new DatagramPacket(
+					respuesta, 
+					respuesta.length
+			);
+			ds.receive(dp2); // Recibe la respuesta del servidor.
+
+			// Convierte la respuesta en un string y muestra la IP.
+			String mensajeRespuesta = new String(
+					dp2.getData(), 
+					0, 
+					dp2.getLength()
+			);
+			
+			System.out.println(&quot;La dirección de IP es: &quot; + mensajeRespuesta);
+
+		} catch (IOException e) {
+			System.out.println(&quot;Error de E/S: &quot; + e.getMessage());
+			
+		} finally {
+			if (ds != null) {
+				ds.close(); // Cierra el socket después de finalizar la comunicación.
+				System.out.println(&quot;Socket del cliente cerrado.&quot;);
+			}
+		}
+	}
+}</code></pre></details></li></ul><ul id="195c1017-243e-8034-841d-de343ab273bb" class="toggle"><li><details open=""><summary>ServidorIP.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-8064-b375-e1d28696a3ee" class="code"><code class="language-Java">package IdentificaciónIP;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
+
+public class ServidorIP {
+	
+	/**
+	 * 
+	 * @param Ana Chun Gómez De Castro 2ºDAM
+	 */
+
+	public static void main(String[] args) {
+		System.out.println(&quot;Arrancando servidor de identificación de IP.&quot;);
+
+		DatagramSocket ds = null;
+
+		try {
+			// Se crea un DatagramSocket en el puerto 8888 y localhost.
+			InetSocketAddress isa = new InetSocketAddress(&quot;localhost&quot;, 8888);
+			ds = new DatagramSocket(isa);
+
+			while (true) {
+				byte[] buffer = new byte[1024]; // Buffer para almacenar los datos recibidos.
+				
+				DatagramPacket dp1 = new DatagramPacket(
+						buffer, 
+						buffer.length
+				);
+				
+				ds.receive(dp1); // Recibe el paquete del cliente
+
+				InetAddress ia = dp1.getAddress(); // Dirección IP del cliente.
+				int puertoCliente = dp1.getPort(); // Puerto del cliente.
+
+				// Se muestra la dirección IP y el puerto del cliente.
+				System.out.println(&quot;Cliente conectado desde IP &quot; + ia.getHostAddress() + 
+								   &quot; con el puerto  &quot; + puertoCliente);
+
+				String respuesta = ia.getHostAddress(); // La respuesta será la dirección IP del cliente.
+				byte[] respuestaEnBytes = respuesta.getBytes();
+
+				DatagramPacket dp2 = new DatagramPacket(
+						respuestaEnBytes, 
+						respuestaEnBytes.length, 
+						ia, 
+						puertoCliente
+				);
+
+				ds.send(dp2); // Envía la respuesta al cliente.
+				System.out.println(&quot;La dirección de IP es: &quot; + respuesta);
+			}
+
+		} catch (SocketException e) {
+			System.out.println(&quot;Error al crear el socket: &quot; + e.getMessage());
+			
+		} catch (IOException e) {
+			System.out.println(&quot;Error de E/S: &quot; + e.getMessage());
+			
+		} finally {
+			if (ds != null) {
+				ds.close(); // Asegura que el socket se cierre al finalizar.
+				System.out.println(&quot;Socket del servidor cerrado.&quot;);
+			}
+		}
+	}
+}</code></pre></details></li></ul><p id="195c1017-243e-808d-9b0c-fa100372abda" class="">
+</p><p id="195c1017-243e-8068-b405-d5b81487fb22" class="">
+</p><p id="195c1017-243e-8051-bccf-e5842640ef2e" class="">3. Implementa un servicio de publicación de mensajes. Los clientes enviarán mensajes de texto al servidor, que los presentará por pantalla. Utiliza para ello invocación de métodos remotos.</p><ul id="195c1017-243e-8024-96f2-c78c568c8d07" class="toggle"><li><details open=""><summary>ClientePublicacionMensaje.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-8039-a41b-f022a6cea6ca" class="code"><code class="language-Java">package PublicaciónDeMensajes;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+// Cliente se conecta al servidor RMI y envía mensajes.
+public class ClientePublicacionMensaje {
+	
+	/**
+	 * 
+	 * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+	 */
+	
+    public static void main(String[] args) {
+        try {
+            // Localiza el registro de objetos remotos en el puerto 8888.
+            System.out.println(&quot; Localizando el registro de objetos remotos...&quot;);
+            Registry r = LocateRegistry.getRegistry(&quot;localhost&quot;, 8888);
+            System.out.println(&quot; Registro RMI localizado.&quot;);
+
+            // Obtiene la referencia al objeto remoto registrado como &quot;PublicacionDeMensaje&quot;
+            System.out.println(&quot; Obteniendo referencia del objeto remoto...&quot;);
+            Interfaz i = (Interfaz) r.lookup(&quot;PublicacionDeMensaje&quot;);
+
+            // Envía un mensaje al servidor y recibe la respuesta.
+            String respuesta1 = i.PublicacionDeMensaje(&quot;¡Hola, mundo!&quot;);
+            String respuesta2 = i.PublicacionDeMensaje(&quot;¡Adiós, mundo cruel!&quot;);
+
+            // Imprime las respuestas del servidor.
+            System.out.println(&quot; Referencia obtenida. Enviando mensajes al servidor...&quot;);
+            System.out.println(&quot; Respuesta del servidor: &quot; + respuesta1);
+            System.out.println(&quot; Respuesta del servidor: &quot; + respuesta2);
+
+            // Confirma que los mensajes fueron enviados con éxito.
+            System.out.println(&quot; Mensajes enviados con éxito.&quot;);
+
+        } catch (Exception e) {
+            // Si ocurre un error, se imprime el mensaje de error.
+            System.out.println(&quot; Error en el cliente: &quot; + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre></details></li></ul><ul id="195c1017-243e-805c-9d18-d9d6711bad9f" class="toggle"><li><details open=""><summary>Interfaz.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-80a9-a5ef-d29779c42f74" class="code"><code class="language-Java">package PublicaciónDeMensajes;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+/**
+ * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+ */
+
+// Interfaz remota del memtodo de publicación de mensajes.
+public interface Interfaz extends Remote {
+	
+	//Método implementado por ek servidor que va a recibir el mensaje.
+    String PublicacionDeMensaje(String message) throws RemoteException;
+}
+</code></pre></details></li></ul><ul id="195c1017-243e-80ec-abe2-e80f61bc99a2" class="toggle"><li><details open=""><summary>ServidorPublicacionMensaje.java</summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195c1017-243e-80c6-830e-e4d9c638a183" class="code"><code class="language-Java">package PublicaciónDeMensajes;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 
-</code>
-</pre>
+public class ServidorPublicacionMensaje implements Interfaz {
 
-        <pre>
-<code>
-<h2>Cliente.java</h2>
-<!--  -->
-</code>
-</pre>
+    // Implementación del método remoto para publicar un mensaje
+    @Override
+    public String PublicacionDeMensaje(String message) throws RemoteException {
+        // Imprime  el mensaje recibido en el servidor.
+        System.out.println(&quot;Mensaje recibido en el servidor: &quot; + message);
+        // Devuelve una respuesta confirmando que el mensaje fue recibido.
+        return &quot;Servidor confirma que se ha enviado el mensaje: &quot; + message;
+    }
+    
+    /**
+     * 
+     * @Alumna: Ana Chun Gómez de Castro 2ºDAM
+     */
 
-        <hr style="border: 3px solid whitesmoke;"> <!-- ESPACIO -->
+    // Inicia el servidor RMI
+    public static void main(String[] args) {
+        try {
+            System.out.println(&quot; Iniciando el servidor RMI...&quot;);
 
-        <pre>
-<code>
-<h1>Ejercicio 3</h1> <!-- Ejercicio 3 -->
-<h2>Servidor.java</h2>
-<!--  -->
-</code>
-</pre>
+            // Crea un registro RMI en el puerto 8888.
+            Registry r = LocateRegistry.createRegistry(8888);
+            
+            // Mensaje de que se ha creado el registro.
+            System.out.println(&quot; Registro RMI creado en el puerto 8888.&quot;);
 
-        <pre>
-<code>
-<h2>Interfaz.java</h2>
-<!--  -->
-</code>
-</pre>
+            // Instancia del servidor.
+            ServidorPublicacionMensaje s = new ServidorPublicacionMensaje();
+            
+            // Objeto del servidor para que sea accesible de forma remota.
+            Interfaz i = (Interfaz) UnicastRemoteObject.exportObject(s, 0);
+            
+            // Registra el objeto remoto en el registro bajo el nombre &quot;PublicacionDeMensaje&quot;
+            r.rebind(&quot;PublicacionDeMensaje&quot;, i);
 
+            System.out.println(&quot; Servidor RMI listo y esperando conexiones.&quot;);
+            System.out.println(&quot; &quot;); // Espacio y que quede bonito.
 
-        <pre>
-<code>
-<h2>Servidor.java</h2>
-<!--  -->
-</code>
-</pre>
-    </div>
-
-</body>
-
-</html>
+        } catch (RemoteException e) {
+            // Si ocurre un error, se imprime el mensaje de error.
+            System.out.println(&quot; Error en el servidor: &quot; + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}</code></pre></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
